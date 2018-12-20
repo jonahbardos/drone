@@ -1,0 +1,57 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+
+<script type ="text/javascript">
+    $(document).ready(function (){
+
+
+        var socket = io(); //1
+
+
+        socket.on('greeting', function (data) { //4
+        console.log(data.msg); //5
+        socket.emit('thankyou', { msg: 'Thank you for connecting me! -Client' }); //6
+        });
+
+        $('#test').click(function(){
+            socket.emit('takeoff', { msg: "Telling drone to takeoff!"});
+        });
+
+        $('#land').click(function () {
+            socket.emit('land', {msg: "Landing"});
+        })
+
+        $('#up').click(function () {
+            socket.emit('up', {msg: "going up"});
+        })
+
+        $('#flip').click(function () {
+            socket.emit('flip', {msg: "going up"});
+        })
+
+        $('#stream').click(function () {
+            socket.emit('stream', {msg: "streamon"});
+        })
+        $('#streamoff').click(function () {
+            socket.emit('streamoff', {msg: "streamoff"});
+        })
+
+
+
+
+    });
+</script>
+
+
+
+<button id="test">Takeoff</button>
+<button id="land">Land</button>
+<button id="up">up</button>
+<button id="flip">flip</button>
+<button id="stream">stream</button>
+<button id="streamoff">streamoff</button>
+
+
+
+
